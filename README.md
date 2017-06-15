@@ -17,6 +17,13 @@ For this example, we generate a self-signed SSL certificate. In a real productio
 Generate our self-signed SSL certificate: 
 
 ````
+`openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365`
+````
+
+Grails (and Spring Boot) doesn’t support the PEM format. Instead, we need to use the PKCS12 format for our keys. 
+Fortunately, there is a single `openssl` command to make the conversion:
+
+````
 openssl pkcs12 -export -in cert.pem -inkey key.pem -out keystore.p12 -name tomcat -caname root
 ````
 
@@ -30,12 +37,6 @@ We use several flags
 
 You can read more about pkcs121 by running `man pks12`
 
-Grails (and Spring Boot) doesn’t support the PEM format. Instead, we need to use the PKCS12 format for our keys. 
-Fortunately, there is a single `openssl` command to make the conversion:
-
-````
-openssl pkcs12 -export -in cert.pem -inkey key.pem -out keystore.p12 -name tomcat -caname root
-````
 
 Update `server/grails-app/conf/application.yml` with the following lines at the end:
 
