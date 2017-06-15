@@ -17,7 +17,7 @@ For this example, we generate a self-signed SSL certificate. In a real productio
 Generate our self-signed SSL certificate: 
 
 ````
-`openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365`
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
 ````
 
 Grails (and Spring Boot) doesn’t support the PEM format. Instead, we need to use the PKCS12 format for our keys. 
