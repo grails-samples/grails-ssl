@@ -20,6 +20,16 @@ Generate our self-signed SSL certificate:
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
 ````
 
+We use several flags:
+
+- **x509** this option outputs a self signed certificate instead of a certificate request.
+- **newkey** this option creates a new certificate request and a new private key. rsa:nbits, where nbits is the number of bits, generates an RSA key nbits in size.
+- **keyout** this gives the filename to write the newly created private key to. 
+- **out** This specifies the output filename to write
+- **days** when the -x509 option is being used this specifies the number of days to certify the certificate for. The default is 30 days
+
+You can read more about by running `man req`
+
 Grails (and Spring Boot) doesn’t support the PEM format. Instead, we need to use the PKCS12 format for our keys. 
 Fortunately, there is a single `openssl` command to make the conversion:
 
